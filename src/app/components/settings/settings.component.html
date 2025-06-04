@@ -1,0 +1,66 @@
+<div class="settings-container">
+  <h2>Settings</h2>
+
+  <form [formGroup]="settingsForm" (ngSubmit)="saveSettings()">
+    <div class="settings-section">
+      <h3>Appearance</h3>
+
+      <div class="setting-item">
+        <mat-slide-toggle
+          formControlName="darkMode"
+          (change)="onDarkModeToggle()"
+        >
+          Dark Mode
+        </mat-slide-toggle>
+        <p class="setting-description">Toggle between light and dark theme</p>
+      </div>
+    </div>
+
+    <div class="settings-section">
+      <h3>Notifications</h3>
+
+      <div class="setting-item">
+        <mat-slide-toggle formControlName="notifications">
+          Enable Notifications
+        </mat-slide-toggle>
+        <p class="setting-description">Receive system notifications</p>
+      </div>
+    </div>
+
+    <div class="settings-section">
+      <h3>Display</h3>
+
+      <div class="setting-item">
+        <mat-form-field appearance="outline">
+          <mat-label>Items per page</mat-label>
+          <input
+            matInput
+            type="number"
+            formControlName="itemsPerPage"
+            min="5"
+            max="100"
+          />
+          <mat-error *ngIf="settingsForm.get('itemsPerPage')?.hasError('min')">
+            Minimum 5 items
+          </mat-error>
+          <mat-error *ngIf="settingsForm.get('itemsPerPage')?.hasError('max')">
+            Maximum 100 items
+          </mat-error>
+        </mat-form-field>
+        <p class="setting-description">Number of items to display in lists</p>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="settingsForm.invalid || isLoading"
+      >
+        <span *ngIf="!isLoading">Save Settings</span>
+        <mat-spinner *ngIf="isLoading" diameter="20"></mat-spinner>
+      </button>
+    </div>
+  </form>
+</div>

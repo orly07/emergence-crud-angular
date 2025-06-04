@@ -1,0 +1,56 @@
+.settings-container {
+  padding: 24px;
+  margin-left: 280px;
+  transition: margin-left 0.3s ease;
+}
+
+.sidebar-collapsed ~ .settings-container {
+  margin-left: 80px;
+}
+
+.settings-section {
+  margin-bottom: 32px;
+  background: var(--card-bg);
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--border-color);
+}
+
+.setting-item {
+  margin-bottom: 24px;
+}
+
+.setting-item:last-child {
+  margin-bottom: 0;
+}
+
+.setting-description {
+  margin: 8px 0 0 0;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.actions {
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Responsive */
+@media (max-width: 991.98px) {
+  .settings-container {
+    margin-left: 0 !important;
+    padding-top: 80px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .settings-container {
+    padding: 16px;
+  }
+
+  .settings-section {
+    padding: 16px;
+  }
+}

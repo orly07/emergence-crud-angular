@@ -1,0 +1,182 @@
+/* Import Bootstrap */
+@import "bootstrap/dist/css/bootstrap.min.css";
+/* Import Material Icons */
+@import "https://fonts.googleapis.com/icon?family=Material+Icons";
+/* Import Roboto Font */
+@import "https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap";
+
+/* Blue Theme */
+:root {
+  /* Light theme */
+  --primary-color: #1976d2;
+  --primary-light: #63a4ff;
+  --primary-dark: #004ba0;
+  --background-color: #f5f7fa;
+  --text-color: #2c3e50;
+  --text-secondary: #6c757d;
+  --card-bg: #ffffff;
+  --border-color: #e0e0e0;
+  --hover-color: #f8faff;
+}
+
+.dark-theme {
+  /* Dark theme */
+  --primary-color: #64b5f6;
+  --primary-light: #9be7ff;
+  --primary-dark: #2286c3;
+  --background-color: #333;
+  --text-color: #e0e0e0;
+  --text-secondary: #fff;
+  --card-bg: #1e1e1e;
+  --border-color: #333;
+  --hover-color: #2a2a2a;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  line-height: 1.6;
+}
+
+/* Apply theme to Material dialogs */
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  background-color: var(--card-bg) !important;
+  color: var(--text-color) !important;
+}
+
+/* Add these to your existing sidebar styles */
+.logout-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.logout-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Material Overrides */
+.mat-dialog-container {
+  padding: 0 !important;
+  border-radius: 12px !important;
+  overflow: hidden;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  color: rgba(0, 0, 0, 0.12);
+}
+
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: var(--primary-color);
+}
+
+.mat-form-field.mat-focused .mat-form-field-label {
+  color: var(--primary-color);
+}
+
+.mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+  color: var(--primary-color);
+}
+
+.mat-raised-button.mat-primary {
+  background-color: var(--primary-color);
+}
+
+.mat-raised-button.mat-primary:hover {
+  background-color: var(--primary-dark);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Global Utility Classes */
+.text-primary {
+  color: var(--primary-color) !important;
+}
+
+.bg-primary {
+  background-color: var(--primary-color) !important;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+  border-color: var(--primary-dark);
+}
+
+.btn-outline-primary {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.badge-primary {
+  background-color: var(--primary-color);
+}
+
+/* Layout */
+.main-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.content-wrapper {
+  flex: 1;
+  padding-top: 20px;
+  transition: margin-left 0.3s ease;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 1199.98px) {
+  /* Large devices (desktops, less than 1200px) */
+}
+
+@media (max-width: 991.98px) {
+  /* Medium devices (tablets, less than 992px) */
+}
+
+@media (max-width: 767.98px) {
+  /* Small devices (landscape phones, less than 768px) */
+}
+
+@media (max-width: 575.98px) {
+  /* Extra small devices (portrait phones, less than 576px) */
+}
