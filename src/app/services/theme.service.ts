@@ -15,10 +15,8 @@ export class ThemeService {
 
   private initializeTheme() {
     const savedMode = localStorage.getItem('darkMode');
-    const systemDark = window.matchMedia(
-      '(prefers-color-scheme: dark)'
-    ).matches;
-    const initialMode = savedMode ? savedMode === 'true' : systemDark;
+    // Default to light mode (false) regardless of system preference
+    const initialMode = savedMode ? savedMode === 'true' : false;
     this.darkMode.next(initialMode);
     this.applyTheme(initialMode);
   }
@@ -38,7 +36,6 @@ export class ThemeService {
     }
   }
 
-  // ✅ Public getter for current value
   get currentDarkModeValue(): boolean {
     return this.darkMode.value;
   }

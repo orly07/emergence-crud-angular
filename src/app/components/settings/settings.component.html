@@ -1,3 +1,4 @@
+<!-- src/app/components/settings/settings.component.html -->
 <div class="settings-container">
   <h2>Settings</h2>
 
@@ -33,13 +34,7 @@
       <div class="setting-item">
         <mat-form-field appearance="outline">
           <mat-label>Items per page</mat-label>
-          <input
-            matInput
-            type="number"
-            formControlName="itemsPerPage"
-            min="5"
-            max="100"
-          />
+          <input matInput type="number" formControlName="itemsPerPage" />
           <mat-error *ngIf="settingsForm.get('itemsPerPage')?.hasError('min')">
             Minimum 5 items
           </mat-error>

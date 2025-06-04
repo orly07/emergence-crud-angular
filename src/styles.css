@@ -5,47 +5,34 @@
 /* Import Roboto Font */
 @import "https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap";
 
-/* Blue Theme */
+/* src/styles.css */
 :root {
-  /* Light theme */
+  /* Light theme (default) */
   --primary-color: #1976d2;
-  --primary-light: #63a4ff;
-  --primary-dark: #004ba0;
   --background-color: #f5f7fa;
   --text-color: #2c3e50;
-  --text-secondary: #6c757d;
   --card-bg: #ffffff;
   --border-color: #e0e0e0;
-  --hover-color: #f8faff;
 }
 
 .dark-theme {
   /* Dark theme */
   --primary-color: #64b5f6;
-  --primary-light: #9be7ff;
-  --primary-dark: #2286c3;
-  --background-color: #222;
+  --background-color: #121212;
   --text-color: #e0e0e0;
-  --text-secondary: #fff;
   --card-bg: #1e1e1e;
   --border-color: #333;
-  --hover-color: #2a2a2a;
 }
 
 body {
-  font-family: "Roboto", sans-serif;
-  margin: 0;
-  padding: 0;
   background-color: var(--background-color);
   color: var(--text-color);
   transition: background-color 0.3s ease, color 0.3s ease;
-  line-height: 1.6;
 }
 
-/* Apply theme to Material dialogs */
-.mat-mdc-dialog-container .mdc-dialog__surface {
-  background-color: var(--card-bg) !important;
-  color: var(--text-color) !important;
+/* Apply to Material components */
+.mat-mdc-dialog-container {
+  --mdc-dialog-container-color: var(--card-bg);
 }
 
 /* Add these to your existing sidebar styles */

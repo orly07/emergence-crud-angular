@@ -1,26 +1,24 @@
+// src/app/app.component.ts
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { AuthService } from './services/auth.service';
 import { ThemeService } from './services/theme.service';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
+  imports: [CommonModule, RouterModule, SidebarComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  imports: [
-    SidebarComponent,
-    RouterModule, // <-- Add this for <router-outlet>
-    CommonModule, // <-- Add this for *ngIf and async pipe
-  ],
 })
 export class AppComponent {
   constructor(
     public authService: AuthService,
     private themeService: ThemeService
   ) {
+    // Ensure light mode is applied on startup
     this.themeService.isDarkMode$.subscribe((isDark) => {
       if (isDark) {
         document.documentElement.classList.add('dark-theme');
