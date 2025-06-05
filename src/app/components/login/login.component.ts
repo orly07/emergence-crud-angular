@@ -47,14 +47,16 @@ export class LoginComponent {
     }
   }
 
-  onSubmit() {
-    if (this.loginForm.valid) {
-      const { username, password } = this.loginForm.value;
-      if (this.authService.login(username, password)) {
-        this.loginError = false;
-      } else {
-        this.loginError = true;
-      }
+  async onSubmit() {
+  if (this.loginForm.valid) {
+    const { username, password } = this.loginForm.value;
+    const success = await this.authService.login(username, password);
+    if (success) {
+      this.loginError = false;
+      this.router.navigate(['/dashboard']);
+    } else {
+      this.loginError = true;
     }
   }
+}
 }

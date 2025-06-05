@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
 @Injectable({
   providedIn: 'root',
@@ -8,23 +9,38 @@ import { BehaviorSubject } from 'rxjs';
 export class AuthService {
   private isAuthenticated = new BehaviorSubject<boolean>(false);
   isAuthenticated$ = this.isAuthenticated.asObservable();
+  private supabase: SupabaseClient;
 
   constructor(private router: Router) {
-    // Check initial auth state
+    // Connect to Supabase
+    this.supabase = createClient(
+      'https://ivsnlmaakyzfxciaabtv.supabase.co', // replace with your project URL
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml2c25sbWFha3l6ZnhjaWFhYnR2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDkwOTY1NzksImV4cCI6MjA2NDY3MjU3OX0.x_U-OG8MNVw8lbr7ayZ4zha7yEQJgHqfyMNB5owpnUo' // replace with your anon/public key
+    );
+
     const token = localStorage.getItem('authToken');
     this.isAuthenticated.next(!!token);
   }
 
-  login(username: string, password: string): boolean {
-    // In a real app, this would be an API call
-    if (username === 'admin' && password === 'admin123') {
-      localStorage.setItem('authToken', 'fake-jwt-token');
-      this.isAuthenticated.next(true);
-      this.router.navigate(['/dashboard']);
-      return true;
-    }
+  async login(username: string, password: string): Promise<boolean> {
+  const { data, error } = await this.supabase
+    .from('user_table')
+    .select('*')
+    .eq('username', username)
+    .eq('password', password)
+    .single();
+
+  console.log('Supabase response:', { data, error });
+
+  if (error || !data) {
     return false;
   }
+
+  localStorage.setItem('authToken', JSON.stringify(data));
+  this.isAuthenticated.next(true);
+  return true;
+}
+
 
   logout() {
     localStorage.removeItem('authToken');
