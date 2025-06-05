@@ -38,31 +38,34 @@ export class ApiService {
 
   // Fetch archived products
   getArchivedProducts(): Observable<Product[]> {
-  return from(
-    this.supabase
-      .from('product_table')
-      .select('id, product_name, price, archived_at')
-      .eq('is_archived', true)
-  ).pipe(
-    map((result: any) => {
-      if (result.error) throw result.error;
-      return result.data.map((p: any) => ({
-        id: p.id,
-        name: p.product_name,
-        price: p.price,
-        archivedAt: p.archived_at ? new Date(p.archived_at) : null,
-      }));
-    })
-  );
-}
-
+    return from(
+      this.supabase
+        .from('product_table')
+        .select('id, product_name, price, archived_at')
+        .eq('is_archived', true)
+    ).pipe(
+      map((result: any) => {
+        if (result.error) throw result.error;
+        return result.data.map((p: any) => ({
+          id: p.id,
+          name: p.product_name,
+          price: p.price,
+          archivedAt: p.archived_at ? new Date(p.archived_at) : null,
+        }));
+      })
+    );
+  }
 
   // Add a new product
   createProduct(product: Omit<Product, 'id'>): Observable<Product> {
     return from(
       this.supabase
         .from('product_table')
-        .insert({ product_name: product.name, price: product.price, is_archived: false })
+        .insert({
+          product_name: product.name,
+          price: product.price,
+          is_archived: false,
+        })
         .select()
         .single()
     ).pipe(
@@ -100,18 +103,17 @@ export class ApiService {
 
   // Archive a product (set is_archived = true)
   archiveProduct(id: number): Observable<void> {
-  return from(
-    this.supabase
-      .from('product_table')
-      .update({ is_archived: true, archived_at: new Date().toISOString() })
-      .eq('id', id)
-  ).pipe(
-    map((result: any) => {
-      if (result.error) throw result.error;
-    })
-  );
-}
-
+    return from(
+      this.supabase
+        .from('product_table')
+        .update({ is_archived: true, archived_at: new Date().toISOString() })
+        .eq('id', id)
+    ).pipe(
+      map((result: any) => {
+        if (result.error) throw result.error;
+      })
+    );
+  }
 
   // Restore an archived product (set is_archived = false)
   restoreProduct(id: number): Observable<void> {
@@ -129,12 +131,7 @@ export class ApiService {
 
   // Permanently delete a product
   deleteProduct(id: number): Observable<void> {
-    return from(
-      this.supabase
-        .from('product_table')
-        .delete()
-        .eq('id', id)
-    ).pipe(
+    return from(this.supabase.from('product_table').delete().eq('id', id)).pipe(
       map((result: any) => {
         if (result.error) throw result.error;
       })

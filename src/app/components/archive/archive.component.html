@@ -38,7 +38,7 @@
             <tr *ngFor="let product of archivedProducts">
               <td>{{ product.id }}</td>
               <td>{{ product.name }}</td>
-              <td>{{ product.price | currency }}</td>
+              <td>{{ product.price | currency : "₱" : "symbol" : "1.2-2" }}</td>
               <td>{{ product.archivedAt | date : "medium" }}</td>
               <td>
                 <div class="d-flex gap-2">
